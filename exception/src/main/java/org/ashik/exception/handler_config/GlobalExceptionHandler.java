@@ -1,0 +1,19 @@
+package org.ashik.exception.handler_config;
+
+import org.ashik.exception.ArgumentNotValidException;
+import org.ashik.exception.data.ErrorResponseData;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ArgumentNotValidException.class)
+    public ResponseEntity<?> argumentNotValidExceptionHandling(ArgumentNotValidException exception, WebRequest request){
+        ErrorResponseData errorResponseData = new ErrorResponseData(exception.getMessage(), exception.getMessageCode());
+        return new ResponseEntity<>(errorResponseData, HttpStatus.OK);
+    }
+}
