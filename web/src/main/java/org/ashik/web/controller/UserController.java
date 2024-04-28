@@ -1,5 +1,6 @@
 package org.ashik.web.controller;
 
+import jakarta.validation.Valid;
 import org.ashik.core.dto.request.UserRegistrationReqData;
 import org.ashik.core.service.UserService;
 import org.ashik.web.constant.WebUriConstant;
@@ -18,7 +19,7 @@ public class UserController {
 
     // new user sign up
     @PostMapping(value = WebUriConstant.USER_REGISTRATION)
-    public ResponseEntity<?> registerUser(@RequestBody UserRegistrationReqData userRegistrationReqData){
+    public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationReqData userRegistrationReqData){
         return new ResponseEntity<>(userService.registerUser(userRegistrationReqData),HttpStatus.OK);
     }
 
